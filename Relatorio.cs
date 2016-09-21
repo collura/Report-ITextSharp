@@ -11,7 +11,7 @@ using iTextSharp.text;//ESTENSAO 1 (TEXT)
 using iTextSharp.text.pdf;//ESTENSAO 2 (PDF)
 using System.Data.SQLite;
 
-namespace appEfetivo
+namespace Pdf
 {
 
 
