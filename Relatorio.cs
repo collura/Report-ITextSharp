@@ -31,20 +31,20 @@ namespace Pdf
 
 
         //Emite relatorio de Efetivo
-        public static void relatorioEfetivo(String batalhao, String oficial, String agenteInteligencia) {
+        public static void relatorioEfetivo() {
 
 
             reader = Crud.relatorioEfetivo(batalhao, oficial, agenteInteligencia);
 
             Document doc = new Document(PageSize.A4); //criando e estipulando o tipo da folha usada           
             doc.SetMargins(19, 20, 10, 50); //estibulando o espaçamento das margens que queremos           
-            doc.AddTitle ("Relatorio de Efetivo");
-            doc.AddAuthor("Agência Regional -  CPA / M-11");
+            doc.AddTitle ("Title");
+            doc.AddAuthor("Autor");
             // doc.AddProducer("Producer por Betto");
             doc.AddKeywords("IText");
             doc.AddCreationDate(); //adicionando as configuracoes
             //Caminho onde será savo o arquivo + o nomo do arquivo sempre seguido por .pdf
-            String caminho = @"E:\" + "xxx.pdf";
+            String caminho = @"C:\" + "xxx.pdf";
 
             //Objeto para escrever no documento. com os parametros acima
             PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(caminho, FileMode.Create));
@@ -95,14 +95,6 @@ namespace Pdf
             //Criação do Objeto Célula da tabela para o Titulo  
 
             
-            if (batalhao.Equals("CPA") && oficial.Equals("true"))
-            {
-                t = "Efetivo de Oficiais - CPA / M-11";
-            }
-            else if (batalhao.Equals("CPA") && oficial.Equals("false"))
-            {
-                t = "Efetivo de Praças - CPA / M-11";
-            }
 
             PdfPCell cell = new PdfPCell(new Phrase(t + "\n\n", titulo));          
 
@@ -124,22 +116,22 @@ namespace Pdf
             //Adicionando as celulas que serão o cabeçalho da tabela
             //Quatro celulas pois o Colspan foi defido com 4 colunas, logo cada celula ocupara 
             //uma coluna a partir da esquerda
-            table.AddCell(new Phrase("Post / Grad"));
-            table.AddCell(new Phrase("Re"));
-            table.AddCell(new Phrase("Nome de Guerra"));
-            table.AddCell(new Phrase("Fone Res"));
-            table.AddCell(new Phrase("Fone Cel"));
-            table.AddCell(new Phrase("Email"));
+            table.AddCell(new Phrase("Coluna 1"));
+            table.AddCell(new Phrase("Coluna 2"));
+            table.AddCell(new Phrase("Coluna 3"));
+            table.AddCell(new Phrase("Coluna 4"));
+            table.AddCell(new Phrase("Coluna 5"));
+            table.AddCell(new Phrase("Coluna 6"));
             //Adicionando dados do banco de dados à tabela
            
             while (reader.Read())
             {
-                table.AddCell(new PdfPCell(new Phrase(Dal.reader["postoGrad"].ToString())));
-                table.AddCell(new PdfPCell(new Phrase(Dal.reader["re"].ToString())));
-                table.AddCell(new PdfPCell(new Phrase(Dal.reader["nomeGuerra"].ToString())));
-                table.AddCell(new PdfPCell(new Phrase(Dal.reader["foneRes"].ToString())));
-                table.AddCell(new PdfPCell(new Phrase(Dal.reader["foneCel1"].ToString())));
-                table.AddCell(new PdfPCell(new Phrase(Dal.reader["emailFuncional"].ToString())));
+                table.AddCell(new PdfPCell(new Phrase("Texto 1")));
+                table.AddCell(new PdfPCell(new Phrase("Texto 2")));
+                table.AddCell(new PdfPCell(new Phrase("Texto 3")));
+                table.AddCell(new PdfPCell(new Phrase("Texto 4")));
+                table.AddCell(new PdfPCell(new Phrase("Texto 5")));
+                table.AddCell(new PdfPCell(new Phrase("Texto 6")));
             }
 
             Crud.bdClose();
